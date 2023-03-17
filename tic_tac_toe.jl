@@ -38,6 +38,7 @@ function check_win()
 end
 
 
+
 Base.run(`clear`) # Clear the output
 println("="^40)
 table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
@@ -52,6 +53,7 @@ for i in 1:8
     i%2 != 0 ? push!(order,who_is_first) : push!(order,ci_sq[ci_sq.!=who_is_first][1])
 end
 
+check_unchange(loc,unchanged) = if !unchanged[loc] error("This location has already been selected") end
 
 
 unchanged = ones(Bool,9)
@@ -59,6 +61,8 @@ for who in order
     global table,table
     print("$(who) : Please enter a location : ")
     loc = parse(Int8,readline())
+    if !(loc in 1:9) error("range of location is (1-9)") end
+    check_unchange(loc,unchanged)
     update(loc,who)
     Base.run(`clear`) # Clear the output
     println("="^40)
