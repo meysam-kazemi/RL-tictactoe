@@ -14,8 +14,8 @@ end
 
 function update(loc,who) 
     global table
-    who in ["circle","square"] ? nothing : error("who -> circle or square ")
-    marker = who == "circle" ? "◌" : "◻"
+    who in ["circle","multiplication"] ? nothing : error("who -> circle or muli ")
+    marker = who == "circle" ? "●" : "✖"
     table[loc] = marker;
 end
 
@@ -52,27 +52,29 @@ function human_action(symbol_)
 end
 
 
-global unchanged = ones(Bool,9)
+global unchanged = ones(Bool,9) # For check Duplicate location
 global table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
 function game(player1,player2)
 
     Base.run(`clear`) # Clear the output
     println("="^40)
     print(table_builder(table))
-    ci_sq = ["circle","square"]
-    for i in 1:8
+    ci_sq = ["circle","multiplication"]
+    for i in 1:4
+        println("Player1 : $(ci_sq[1]) ")
         player1(ci_sq[1])
         if check_win()
             println("Player1 WIN !")
             break
         end
+        println("Player21 : $(ci_sq[2]) ")
         player2(ci_sq[2])
         if check_win()
             println("Player2 WIN ! ")
             break
         end
-
     end
+    println("az loop omad biron")
     if !check_win()
         update(findall(x->x.==1,unchanged)[1],ci_sq[1])
         Base.run(`clear`)
