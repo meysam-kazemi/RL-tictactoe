@@ -37,64 +37,48 @@ function check_win()
     return win
 end
 
-
-
-Base.run(`clear`) # Clear the output
-println("="^40)
-table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
-print(table_builder(table))
-
-ci_sq = ["circle","square"]
-who_is_first = rand(ci_sq)
-println("$(who_is_first) is first ...")
-order = []
-for i in 1:8
-    global order
-    i%2 != 0 ? push!(order,who_is_first) : push!(order,ci_sq[ci_sq.!=who_is_first][1])
-end
-
 check_unchange(loc,unchanged) = if !unchanged[loc] error("This location has already been selected") end
 
 
-unchanged = ones(Bool,9)
-for who in order
-    global table,table
-    print("$(who) : Please enter a location : ")
-    loc = parse(Int8,readline())
-    if !(loc in 1:9) error("range of location is (1-9)") end
-    check_unchange(loc,unchanged)
-    update(loc,who)
-    Base.run(`clear`) # Clear the output
-    println("="^40)
-    print(table_builder(table))
-    unchanged[loc] = 0
-    if check_win()
-        println("$who WIN !")
-        break
-    end
-end
-if !check_win()
-    update(findall(x->x.==1,unchanged)[1],who_is_first)
-    Base.run(`clear`)
-    println("="^40)
-    print(table_builder(table))
-    check_win()
-    if check_win()
-        println("--$who_is_first WIN!--")
-    else
-        println("--EQUAL!--")
-    end
-end
-println("="^40)
-
-
-
-
 function game(player1,player2)
+
     Base.run(`clear`) # Clear the output
-println("="^40)
-table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
-print(table_builder(table))
-ci_sq = ["circle","square"]
+    println("="^40)
+    table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
+    print(table_builder(table))
+    ci_sq = ["circle","square"]
+
+    unchanged = ones(Bool,9)
+    
+    for who in order
+        global table,table
+        print("$(who) : Please enter a location : ")
+        loc = parse(Int8,readline())
+        if !(loc in 1:9) error("range of location is (1-9)") end
+        check_unchange(loc,unchanged)
+        update(loc,who)
+        Base.run(`clear`) # Clear the output
+        println("="^40)
+        print(table_builder(table))
+        unchanged[loc] = 0
+        if check_win()
+            println("$who WIN !")
+            break
+        end
+    end
+
+    if !check_win()
+        update(findall(x->x.==1,unchanged)[1],who_is_first)
+        Base.run(`clear`)
+        println("="^40)
+        print(table_builder(table))
+        check_win()
+        if check_win()
+            println("--$who_is_first WIN!--")
+        else
+            println("--EQUAL!--")
+        end
+    end
+    println("="^40)
 
 end
