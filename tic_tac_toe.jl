@@ -59,16 +59,16 @@ function game(player1,player2)
     Base.run(`clear`) # Clear the output
     println("="^40)
     print(table_builder(table))
-    ci_sq = ["circle","multiplication"]
+    ci_ml = ["circle","multiplication"]
     for i in 1:4
-        println("Player1 : $(ci_sq[1]) ")
-        player1(ci_sq[1])
+        println("Player1 : $(ci_ml[1]) ")
+        player1(ci_ml[1])
         if check_win()
             println("Player1 WIN !")
             break
         end
-        println("Player21 : $(ci_sq[2]) ")
-        player2(ci_sq[2])
+        println("Player2 : $(ci_ml[2]) ")
+        player2(ci_ml[2])
         if check_win()
             println("Player2 WIN ! ")
             break
@@ -76,7 +76,7 @@ function game(player1,player2)
     end
     println("az loop omad biron")
     if !check_win()
-        update(findall(x->x.==1,unchanged)[1],ci_sq[1])
+        update(findall(x->x.==1,unchanged)[1],ci_ml[1])
         Base.run(`clear`)
         println("="^40)
         print(table_builder(table))
