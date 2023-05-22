@@ -1,4 +1,4 @@
-function center(x::String)
+function center(x::String) # Print center
     w = 3
     return " "^w * x * " "^w
 end
@@ -12,7 +12,7 @@ function table_builder(table)
     return text
 end
 
-function update(loc,who)
+function update(loc,who) 
     global table
     who in ["circle","square"] ? nothing : error("who -> circle or square ")
     marker = who == "circle" ? "◌" : "◻"
@@ -37,6 +37,7 @@ function check_win()
     return win
 end
 
+# Duplicate location check
 check_unchange(loc) = if !unchanged[loc] error("This location has already been selected") end
 
 function human_action(symbol_)
@@ -52,11 +53,11 @@ end
 
 
 global unchanged = ones(Bool,9)
+global table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
 function game(player1,player2)
 
     Base.run(`clear`) # Clear the output
     println("="^40)
-    table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
     print(table_builder(table))
     ci_sq = ["circle","square"]
     for i in 1:8
@@ -72,7 +73,7 @@ function game(player1,player2)
         end
 
     end
-     if !check_win()
+    if !check_win()
         update(findall(x->x.==1,unchanged)[1],ci_sq[1])
         Base.run(`clear`)
         println("="^40)
@@ -86,3 +87,6 @@ function game(player1,player2)
     end
 
 end
+
+
+game(human_action,human_action)
