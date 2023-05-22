@@ -74,7 +74,6 @@ function game(player1,player2)
             break
         end
     end
-    println("az loop omad biron")
     if !check_win()
         update(findall(x->x.==1,unchanged)[1],ci_ml[1])
         Base.run(`clear`)
