@@ -90,3 +90,11 @@ println("="^40)
 
 
 
+function game(player1,player2)
+    Base.run(`clear`) # Clear the output
+println("="^40)
+table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
+print(table_builder(table))
+ci_sq = ["circle","square"]
+
+end
