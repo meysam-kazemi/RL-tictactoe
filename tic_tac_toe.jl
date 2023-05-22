@@ -51,7 +51,7 @@ function human_action(symbol_)
 end
 
 
-
+global unchanged = ones(Bool,9)
 function game(player1,player2)
 
     Base.run(`clear`) # Clear the output
@@ -59,45 +59,30 @@ function game(player1,player2)
     table = ["1" "4" "7";"2" "5" "8";"3" "6" "9"]
     print(table_builder(table))
     ci_sq = ["circle","square"]
+    for i in 1:8
+        player1(ci_sq[1])
+        if check_win()
+            println("Player1 WIN !")
+            break
+        end
+        player2(ci_sq[2])
+        if check_win()
+            println("Player2 WIN ! ")
+            break
+        end
 
-    global unchanged = ones(Bool,9)
-
-    # write actions
-
-
-
-
-
-    
-    # for who in order
-    #     global table,table
-    #     print("$(who) : Please enter a location : ")
-    #     loc = parse(Int8,readline())
-    #     if !(loc in 1:9) error("range of location is (1-9)") end
-    #     check_unchange(loc,unchanged)
-    #     update(loc,who)
-    #     Base.run(`clear`) # Clear the output
-    #     println("="^40)
-    #     print(table_builder(table))
-    #     unchanged[loc] = 0
-    #     if check_win()
-    #         println("$who WIN !")
-    #         break
-    #     end
-    # end
-
-    # if !check_win()
-    #     update(findall(x->x.==1,unchanged)[1],who_is_first)
-    #     Base.run(`clear`)
-    #     println("="^40)
-    #     print(table_builder(table))
-    #     check_win()
-    #     if check_win()
-    #         println("--$who_is_first WIN!--")
-    #     else
-    #         println("--EQUAL!--")
-    #     end
-    # end
-    # println("="^40)
+    end
+     if !check_win()
+        update(findall(x->x.==1,unchanged)[1],ci_sq[1])
+        Base.run(`clear`)
+        println("="^40)
+        print(table_builder(table))
+        check_win()
+        if check_win()
+            println("--$who_is_first WIN!--")
+        else
+            println("--EQUAL!--")
+        end
+    end
 
 end
