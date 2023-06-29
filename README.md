@@ -1,4 +1,4 @@
-## Reinforcement learning in **Tic Tac Toe** game
+# Reinforcement learning in **Tic Tac Toe** game
 I want to make a **Tic-Tac-Toe** game in **Julia** where humans can play against the computer.
 I use **Reinforcement Learning** algorithms to make the computer play well.
 ```diff
